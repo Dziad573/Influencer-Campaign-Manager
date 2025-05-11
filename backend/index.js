@@ -21,8 +21,15 @@ db.connect(err => {
     console.log('Połączono z MySQL');
 });
 
-app.get('/influencers', (_, res) => {
-    db.query('SELECT * FROM influencers', (err, results) => {
+app.get('/campaigns', (_, res) => {
+    db.query('SELECT * FROM campaigns', (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+app.get('/campaign_effects', (_, res) => {
+    db.query('SELECT * FROM campaign_effects', (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
     });
