@@ -22,14 +22,60 @@ db.connect(err => {
 });
 
 app.get('/campaigns', (_, res) => {
-    db.query('SELECT * FROM campaigns', (err, results) => {
+    const query = `
+        SELECT * FROM campaigns
+    `;
+    db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
     });
 });
 
 app.get('/campaign_effects', (_, res) => {
-    db.query('SELECT * FROM campaign_effects', (err, results) => {
+    const query = `
+        SELECT * FROM campaign_effects
+    `;
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+app.get('/campaign_influencers', (_, res) => {
+    const query = `
+        SELECT * FROM campaign_influencers
+    `;
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+app.get('/influencers', (_, res) => {
+    const query = `
+        SELECT * FROM influencers
+    `;
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+app.get('/payments', (_, res) => {
+    const query = `
+        SELECT * FROM payments
+    `;
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+app.get('/users', (_, res) => {
+    const query = `
+        SELECT * FROM users
+    `;
+    db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
     });

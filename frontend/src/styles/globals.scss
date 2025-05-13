@@ -14,10 +14,9 @@ body {
 }
 
 a {
+    color: var(--accent);
     text-decoration: none;
-    color: inherit;
 }
-
 ul {
     list-style: none;
 }

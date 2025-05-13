@@ -59,13 +59,13 @@
 }
 
 .homepage .section--top-campaigns, .homepage .section--upcoming-campaigns {
-  background: #f5f5f5;
+  background: var(--bg-section);
   border-radius: 0.5rem;
   margin: 1rem 0;
 }
 
 .homepage .campaign-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;

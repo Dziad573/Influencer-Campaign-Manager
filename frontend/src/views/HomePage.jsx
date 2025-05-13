@@ -39,9 +39,9 @@ export const HomePage = () => {
             <section className="hero">
                 {/* <video className="hero__video" src="/video/hero.mp4" autoPlay loop muted playsInline></video> */}
                 <div className="hero__overlay">
-                <h1 className="hero__title">Zarządzaj kampaniami z influencerami skutecznie</h1>
-                <p className="hero__subtitle">Nowoczesna platforma do śledzenia wyników i zarządzania współpracami</p>
-                <p className="hero__cta">Rozpocznij teraz</p>
+                    <h1 className="hero__title">Zarządzaj kampaniami z influencerami skutecznie</h1>
+                    <p className="hero__subtitle">Nowoczesna platforma do śledzenia wyników i zarządzania współpracami</p>
+                    <p className="hero__cta">Rozpocznij teraz</p>
                 </div>
             </section>
 
