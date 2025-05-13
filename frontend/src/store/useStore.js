@@ -6,6 +6,12 @@ const useStore = create((set) => ({
     setUser: (user) => set({ user }),
     toggleTheme: () =>
     set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
+    
+    upcomingCampaigns: [],
+    setUpcomingCampaigns: (upcomingCampaigns) => set({ upcomingCampaigns }),
+
+    topCampaigns: [],
+    setTopCampaigns: (topCampaigns) => set({ topCampaigns }),
 }));
 
 export default useStore;
