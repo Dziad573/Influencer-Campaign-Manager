@@ -1,5 +1,5 @@
 const express = require('express');
-const basicAuth = require('basic-auth');
+// const basicAuth = require('basic-auth');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -11,18 +11,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 {/* Authentication */}
-function auth(req, res, next) {
-    const user = basicAuth(req);
+// function auth(req, res, next) {
+//     const user = basicAuth(req);
 
-    const username = 'admin';
-    const password = 'admin';
+//     const username = 'admin';
+//     const password = 'admin';
 
-    if (!user || user.name !== username || user.pass !== password) {
-        res.set('WWW-Authenticate', 'Basic realm="Protected Area"');
-        return res.status(401).send('Access denied');
-    }
-    next();
-}
+//     if (!user || user.name !== username || user.pass !== password) {
+//         res.set('WWW-Authenticate', 'Basic realm="Protected Area"');
+//         return res.status(401).send('Access denied');
+//     }
+//     next();
+// }
 
 {/* MySQL connection */}
 const db = mysql.createConnection({
@@ -39,7 +39,7 @@ db.connect(err => {
 });
 
 {/* Fetching all campaigns */}
-app.get('/campaigns', auth, (_, res) => {
+app.get('/campaigns', (_, res) => {
     const query = `
         SELECT * FROM campaigns;
     `;
@@ -50,7 +50,7 @@ app.get('/campaigns', auth, (_, res) => {
 });
 
 {/* Fetching all campaign effects */}
-app.get('/campaign_effects', auth, (_, res) => {
+app.get('/campaign_effects', (_, res) => {
     const query = `
         SELECT * FROM campaign_effects;
     `;
@@ -61,7 +61,7 @@ app.get('/campaign_effects', auth, (_, res) => {
 });
 
 {/* Fetching all campaign influencers */}
-app.get('/campaign_influencers', auth, (_, res) => {
+app.get('/campaign_influencers', (_, res) => {
     const query = `
         SELECT * FROM campaign_influencers;
     `;
@@ -72,7 +72,7 @@ app.get('/campaign_influencers', auth, (_, res) => {
 });
 
 {/* Fetching all influencers */}
-app.get('/influencers', auth, (_, res) => {
+app.get('/influencers', (_, res) => {
     const query = `
         SELECT * FROM influencers;
     `;
@@ -83,7 +83,7 @@ app.get('/influencers', auth, (_, res) => {
 });
 
 {/* Fetching all payments */}
-app.get('/payments', auth, (_, res) => {
+app.get('/payments', (_, res) => {
     const query = `
         SELECT * FROM payments;
     `;
@@ -94,7 +94,7 @@ app.get('/payments', auth, (_, res) => {
 });
 
 {/* Fetching all users */}
-app.get('/users', auth, (_, res) => {
+app.get('/users', (_, res) => {
     const query = `
         SELECT * FROM users;
     `;
@@ -105,7 +105,7 @@ app.get('/users', auth, (_, res) => {
 });
 
 {/* Fetching top campaigns */}
-app.get('/campaigns/top_campaigns', auth, (_, res) => {
+app.get('/campaigns/top_campaigns', (_, res) => {
     const query = `
         SELECT * FROM campaign_effects 
         INNER JOIN 
@@ -119,7 +119,7 @@ app.get('/campaigns/top_campaigns', auth, (_, res) => {
 });
 
 {/* Fetching upcoming campaigns */}
-app.get('/campaigns/upcoming_campaigns', auth, (_, res) => {
+app.get('/campaigns/upcoming_campaigns', (_, res) => {
     const query = `
         SELECT * FROM campaigns 
         WHERE status = 'Planned' AND start_date > NOW() 
@@ -132,7 +132,7 @@ app.get('/campaigns/upcoming_campaigns', auth, (_, res) => {
 });
 
 {/* Fetching the total number of campaigns */}
-app.get('/campaigns/count', auth, (_, res) => {
+app.get('/campaigns/count', (_, res) => {
     const query = `
         SELECT COUNT(*) AS total_campaigns FROM campaigns;
     `;
@@ -143,7 +143,7 @@ app.get('/campaigns/count', auth, (_, res) => {
 });
 
 {/* Fetching the total number of influencers */}
-app.get('/influencers/count', auth, (_, res) => {
+app.get('/influencers/count', (_, res) => {
     const query = `
         SELECT COUNT(*) AS total_influencers FROM influencers;
     `;
@@ -154,7 +154,7 @@ app.get('/influencers/count', auth, (_, res) => {
 });
 
 {/* Fetching the total number of likes across all campaigns */}
-app.get('/campaign_effects/likes/total', auth, (_, res) => {
+app.get('/campaign_effects/likes/total', (_, res) => {
     const query = `
         SELECT SUM(likes) AS total_likes FROM campaign_effects;
     `;

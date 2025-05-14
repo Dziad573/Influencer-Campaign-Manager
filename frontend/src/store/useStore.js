@@ -12,6 +12,15 @@ const useStore = create((set) => ({
 
     topCampaigns: [],
     setTopCampaigns: (topCampaigns) => set({ topCampaigns }),
+    
+    numberOfCampaigns: [],
+    setNumberOfCampaigns: (numberOfCampaigns) => set({ numberOfCampaigns }),
+
+    numberOfInfluencers: [],
+    setNumberOfInfluencers: (numberOfInfluencers) => set({ numberOfInfluencers }),
+
+    numberOfLikesForAllCampaigns: [],
+    setNumberOfLikes: (numberOfLikesForAllCampaigns) => set({ numberOfLikesForAllCampaigns }),
 }));
 
 export default useStore;

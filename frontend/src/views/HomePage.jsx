@@ -7,8 +7,15 @@ export const HomePage = () => {
         theme,
         setUpcomingCampaigns,
         setTopCampaigns,
+        setNumberOfCampaigns,
+        setNumberOfInfluencers,
+        setNumberOfLikes,
         upcomingCampaigns,
         topCampaigns,
+        numberOfCampaigns,
+        numberOfInfluencers,
+        numberOfLikesForAllCampaigns,
+
     } = useStore();
     
     useEffect(() => {
@@ -17,7 +24,7 @@ export const HomePage = () => {
     
     {/* Fetching top campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaign_effects')
+        fetch('http://localhost:3001/campaigns/top_campaigns')
         .then(res => res.json())
         .then(data => setTopCampaigns(data))
         .catch(err => console.error('Błąd:', err));
@@ -25,12 +32,38 @@ export const HomePage = () => {
     
     {/* Fetching upcoming campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaigns')
+        fetch('http://localhost:3001/campaigns/upcoming_campaigns')
             .then(res => res.json())
             .then(data => setUpcomingCampaigns(data))
             .catch(err => console.error('Błąd:', err));
     }, [setUpcomingCampaigns]);
+
+    {/* Fetching the total number of campaigns */}
+    useEffect(() => {
+        fetch('http://localhost:3001/campaigns/count')
+            .then(res => res.json())
+            .then(data => setNumberOfCampaigns(data))
+            .catch(err => console.error('Błąd:', err));
+    }, [setNumberOfCampaigns]);
+
+    {/* Fetching the total number of influencers */}
+    useEffect(() => {
+        fetch('http://localhost:3001/influencers/count')
+            .then(res => res.json())
+            .then(data => setNumberOfInfluencers(data))
+            .catch(err => console.error('Błąd:', err));
+    }, [setNumberOfInfluencers]);
+
+    {/* Fetching the total number of likes across all campaigns */}
+    useEffect(() => {
+        fetch('http://localhost:3001/campaign_effects/likes/total')
+            .then(res => res.json())
+            .then(data => setNumberOfLikes(data))
+            .catch(err => console.error('Błąd:', err));
+    }, [setNumberOfLikes]);
+
     
+    {/* Filter upcoming campaigns */}
     const upcomingCampaignsFilter = upcomingCampaigns.filter(c => new Date(c.start_date) > new Date());
     
     return (
@@ -70,6 +103,56 @@ export const HomePage = () => {
                 ))}
                 </ul>
             </section>
+
+            {/* CTA */}
+            <section className="section section--cta">
+                <h2 className="section__title">Dołącz do naszej platformy</h2>
+                <p>Zostań częścią sieci – jako influencer lub menedżer kampanii!</p>
+                <div className="cta-buttons">
+                    <button className="cta-button influencer">
+                        <i className="fas fa-user-astronaut"></i> Zarejestruj się jako influencer
+                    </button>
+                    <button className="cta-button manager">
+                        <i className="fas fa-chart-line"></i> Zarejestruj się jako menedżer
+                    </button>
+                </div>
+            </section>
+
+            {/* Statistics */}
+            <section className="section section--stats">
+                <h2 className="section__title">Statystyki</h2>
+                <div className="stats">
+                    <div className="stat-box">
+                        {console.log(topCampaigns)}
+                        {console.log(numberOfInfluencers)}
+                        <span className="stat-number">{numberOfCampaigns[0]?.total_campaigns}</span>
+                        <p>Kampanii zrealizowanych</p>
+                    </div>
+                    <div className="stat-box">
+                        <span className="stat-number">{numberOfInfluencers[0]?.total_influencers}</span>
+                        <p>Influencerów</p>
+                    </div>
+                    <div className="stat-box">
+                        <span className="stat-number">{numberOfLikesForAllCampaigns[0]?.total_likes}</span>
+                        <p>Polubień</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Opinions */}
+            <section className="section section--testimonials">
+                <h2 className="section__title">Co mówią nasi użytkownicy</h2>
+                <div className="testimonial">
+                    <p>"Dzięki tej platformie zwiększyliśmy nasze zasięgi o 40%! Wszystko w jednym miejscu — genialne!"</p>
+                    <span className="author">— Anna, Marketing Manager</span>
+                </div>
+                <div className="testimonial">
+                    <p>"Prosty sposób na znalezienie nowych kampanii i monitorowanie efektów. Polecam każdemu influencerowi."</p>
+                    <span className="author">— Michał, Influencer</span>
+                </div>
+            </section>
+
+            {/* Footer */}
         </div>
     );
 };
