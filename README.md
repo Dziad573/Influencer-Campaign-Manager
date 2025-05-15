@@ -6,18 +6,19 @@ Projekt polega na stworzeniu relacyjnej bazy danych oraz aplikacji webowej wspie
 System wykorzystuje:
 - **MySQL** – relacyjna baza danych,
 - **Node.js + Express** – backend udostępniający REST API,
-- **React** – frontendowa aplikacja jednokrotnego ładowania (SPA).
+- **React** – frontendowa aplikacja.
 
 Platforma umożliwia firmom i agencjom marketingowym monitorowanie kampanii, wypłat wynagrodzeń oraz analizowanie efektów działań reklamowych w nowoczesnym, responsywnym interfejsie.
 
 ## Funkcjonalności
 
-- Rejestracja i edycja danych influencerów (dane kontaktowe, platformy, statystyki).  
+- Rejestracja i edycja danych influencerów (dane kontaktowe, platformy, statystyki).
 - Tworzenie kampanii marketingowych z budżetem, celami i terminami.  
 - Przypisywanie influencerów do kampanii z ustalonymi stawkami i statusem współpracy.  
 - Wprowadzanie danych o efektach kampanii (wyświetlenia, kliknięcia, konwersje).  
 - Rozliczanie wypłat i śledzenie statusu płatności.  
-- Generowanie raportów i zestawień.  
+- Generowanie raportów i zestawień.
+- Logowanie - inny widok dla każdej grupy użytkowników  
 - Panel administratora z podziałem na role (admin, manager, influencer, viewer).
 
 ## Struktura bazy danych (główne tabele)
