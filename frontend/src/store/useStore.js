@@ -6,6 +6,13 @@ const useStore = create((set) => ({
     setUser: (user) => set({ user }),
     toggleTheme: () =>
     set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+
+    user: JSON.parse(localStorage.getItem('user')) || null,
+    setUser: (user) => set({ user }),
+    logout: () => {
+        localStorage.removeItem('user');
+        set({ user: null });
+    },
     
     upcomingCampaigns: [],
     setUpcomingCampaigns: (upcomingCampaigns) => set({ upcomingCampaigns }),

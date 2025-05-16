@@ -24,6 +24,8 @@ app.use(bodyParser.json());
 //     next();
 // }
 
+
+
 {/* MySQL connection */}
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -36,6 +38,36 @@ const db = mysql.createConnection({
 db.connect(err => {
     if (err) return console.error('Błąd połączenia:', err);
     console.log('Połączono z MySQL');
+});
+
+{/* Login endpoint */}
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    const query = `SELECT * FROM users WHERE email = ? AND password_hash = ?`;
+    db.query(query, [email, password], (err, results) => {
+        if (err) return res.status(500).send(err);
+        if (results.length === 0) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const user = results[0];
+        const { user_id, name, role } = user;
+
+        res.json({ id: user_id, name, email, role });
+    });
+});
+
+{/* Fetch user by ID */}
+app.get('/users/:id', (req, res) => {
+    const { id } = req.params;
+
+    const query = `SELECT user_id, name, email, role FROM users WHERE user_id = ?`;
+    db.query(query, [id], (err, results) => {
+        if (err) return res.status(500).send(err);
+        if (results.length === 0) return res.status(404).json({ message: 'User not found' });
+        res.json(results[0]);
+    });
 });
 
 {/* Fetching all campaigns */}

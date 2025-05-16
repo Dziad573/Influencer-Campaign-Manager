@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import useStore from '../store/useStore';
 import './home.scss';
 
@@ -15,51 +16,61 @@ export const HomePage = () => {
         numberOfCampaigns,
         numberOfInfluencers,
         numberOfLikesForAllCampaigns,
+        user,
+        setUser,
 
     } = useStore();
     
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
+
+    useEffect(() => {
+        const userId = JSON.parse(localStorage.getItem('user'))?.id;
+
+        if (userId) {
+            axios.get(`http://localhost:3001/users/${userId}`)
+                .then(res => {
+                    console.log('Dane użytkownika:', res.data);
+                    setUser(res.data);
+                })
+                .catch(err => console.error('Błąd pobierania użytkownika:', err));
+        }
+    }, []);
     
     {/* Fetching top campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaigns/top_campaigns')
-        .then(res => res.json())
-        .then(data => setTopCampaigns(data))
-        .catch(err => console.error('Błąd:', err));
-    }, [setTopCampaigns]);
+    axios.get('http://localhost:3001/campaigns/top_campaigns')
+        .then(res => setTopCampaigns(res.data))
+        .catch(err => console.error('Błąd (top_campaigns):', err));
+}, [setTopCampaigns]);
     
     {/* Fetching upcoming campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaigns/upcoming_campaigns')
-            .then(res => res.json())
-            .then(data => setUpcomingCampaigns(data))
-            .catch(err => console.error('Błąd:', err));
+        axios.get('http://localhost:3001/campaigns/upcoming_campaigns')
+            .then(res => setUpcomingCampaigns(res.data))
+            .catch(err => console.error('Błąd (upcoming_campaigns):', err));
     }, [setUpcomingCampaigns]);
 
     {/* Fetching the total number of campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaigns/count')
-            .then(res => res.json())
-            .then(data => setNumberOfCampaigns(data))
-            .catch(err => console.error('Błąd:', err));
+        axios.get('http://localhost:3001/campaigns/count')
+            .then(res => setNumberOfCampaigns(res.data))
+            .catch(err => console.error('Błąd (campaigns/count):', err));
     }, [setNumberOfCampaigns]);
 
     {/* Fetching the total number of influencers */}
     useEffect(() => {
-        fetch('http://localhost:3001/influencers/count')
-            .then(res => res.json())
-            .then(data => setNumberOfInfluencers(data))
-            .catch(err => console.error('Błąd:', err));
+        axios.get('http://localhost:3001/influencers/count')
+            .then(res => setNumberOfInfluencers(res.data))
+            .catch(err => console.error('Błąd (influencers/count):', err));
     }, [setNumberOfInfluencers]);
 
     {/* Fetching the total number of likes across all campaigns */}
     useEffect(() => {
-        fetch('http://localhost:3001/campaign_effects/likes/total')
-            .then(res => res.json())
-            .then(data => setNumberOfLikes(data))
-            .catch(err => console.error('Błąd:', err));
+        axios.get('http://localhost:3001/campaign_effects/likes/total')
+            .then(res => setNumberOfLikes(res.data))
+            .catch(err => console.error('Błąd (likes/total):', err));
     }, [setNumberOfLikes]);
 
     
@@ -75,6 +86,7 @@ export const HomePage = () => {
                     <h1 className="hero__title">Zarządzaj kampaniami z influencerami skutecznie</h1>
                     <p className="hero__subtitle">Nowoczesna platforma do śledzenia wyników i zarządzania współpracami</p>
                     <p className="hero__cta">Rozpocznij teraz</p>
+                    <h1>Witaj{user ? `, ${user.name}` : ''}!</h1>
                 </div>
             </section>
 
