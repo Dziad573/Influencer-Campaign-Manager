@@ -40,11 +40,16 @@
 
         &__cta {
             margin-top: 2rem;
-            background-color: var(--accent);
+            background-color: var(--accent-dark);
             color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 0.5rem;
             cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: var(--accent);
+            }
         }
     }
 
@@ -94,7 +99,7 @@
             transition: background-color 0.3s ease;
 
             &.influencer {
-                background-color: var(--accent);
+                background-color: var(--accent-dark);
             }
 
             &.manager {
