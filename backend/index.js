@@ -52,9 +52,9 @@ app.post('/login', (req, res) => {
         }
 
         const user = results[0];
-        const { user_id, name, role } = user;
+        const { user_id, username, role } = user;
 
-        res.json({ id: user_id, name, email, role });
+        res.json({ id: user_id, username, email, role });
     });
 });
 
@@ -62,7 +62,7 @@ app.post('/login', (req, res) => {
 app.get('/users/:id', (req, res) => {
     const { id } = req.params;
 
-    const query = `SELECT user_id, name, email, role FROM users WHERE user_id = ?`;
+    const query = `SELECT user_id, username, email, role FROM users WHERE user_id = ?`;
     db.query(query, [id], (err, results) => {
         if (err) return res.status(500).send(err);
         if (results.length === 0) return res.status(404).json({ message: 'User not found' });

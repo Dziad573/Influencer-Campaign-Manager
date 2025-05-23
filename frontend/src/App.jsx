@@ -13,12 +13,14 @@ import { RegisterPage } from './views/RegisterPage.jsx';
 import { UserPanelPage } from './views/UserPanelPage.jsx';
 import { ReportsPage } from './views/ReportsPage.jsx';
 import { AboutPage } from './views/AboutPage.jsx';
+import { TopBar } from './components/TopBar/TopBar.jsx';
 
 export const App = () => {
     const { user } = useStore(); // {email, role, etc.} from Zustand store
 
     return (
         <Router>
+            <TopBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/campaigns" element={<CampaignListPage />} />

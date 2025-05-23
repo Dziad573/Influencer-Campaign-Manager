@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useStore from '../store/useStore';
 import './home.scss';
-
 export const HomePage = () => {
     const { 
         theme,
@@ -26,7 +25,7 @@ export const HomePage = () => {
     }, [theme]);
 
     useEffect(() => {
-        const userId = JSON.parse(localStorage.getItem('user'))?.id;
+        const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
         if (userId) {
             axios.get(`http://localhost:3001/users/${userId}`)
@@ -37,6 +36,7 @@ export const HomePage = () => {
                 .catch(err => console.error('Błąd pobierania użytkownika:', err));
         }
     }, []);
+
     
     {/* Fetching top campaigns */}
     useEffect(() => {
@@ -86,7 +86,7 @@ export const HomePage = () => {
                     <h1 className="hero__title">Zarządzaj kampaniami z influencerami skutecznie</h1>
                     <p className="hero__subtitle">Nowoczesna platforma do śledzenia wyników i zarządzania współpracami</p>
                     <p className="hero__cta">Rozpocznij teraz</p>
-                    <h1>Witaj{user ? `, ${user.name}` : ''}!</h1>
+                    <h1>{user ?  `Witaj, ${user.username} !` : ''}</h1>
                 </div>
             </section>
 
@@ -155,7 +155,7 @@ export const HomePage = () => {
             <section className="section section--testimonials">
                 <h2 className="section__title">Co mówią nasi użytkownicy</h2>
                 <div className="testimonial">
-                    <p>"Dzięki tej platformie zwiększyliśmy nasze zasięgi o 40%! Wszystko w jednym miejscu — genialne!"</p>
+                    <p>"Dzięki tej platformie zwiększyliśmy nasze zasięgi o 20%! Wszystko w jednym miejscu — genialne!"</p>
                     <span className="author">— Anna, Marketing Manager</span>
                 </div>
                 <div className="testimonial">
