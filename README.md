@@ -43,7 +43,7 @@ Platforma umożliwia firmom i agencjom marketingowym monitorowanie kampanii, wyp
 1. **Baza danych**  
    - Zainstaluj XAMPP i uruchom MySQL (Apache opcjonalnie)  
    - Otwórz phpMyAdmin (http://localhost/phpmyadmin)  
-   - Utwórz bazę danych: influencer_campaign_manager_db  
+   - Utwórz bazę danych: icm_bd ewentualnie influencer_campaign_manager_db (sprawdź plik /config/database.js) 
    - Zaimportuj pliki SQL z folderu sql
 
 
