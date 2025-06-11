@@ -29,6 +29,8 @@ Platforma umożliwia firmom i agencjom marketingowym monitorowanie kampanii, wyp
 - `campaign_effects` – efekty kampanii przypisane do influencerów.  
 - `payments` – dane o wypłaconych wynagrodzeniach.  
 - `users` – użytkownicy systemu (role i dane logowania).
+- `platforms` – dane o platformach społecznościowych.  
+- `influencer_platforms` – konta influencerów na danych platformach.
 
 ## Technologie
 
@@ -60,18 +62,11 @@ Platforma umożliwia firmom i agencjom marketingowym monitorowanie kampanii, wyp
 | Metoda      | Endpoint            | Opis       |
 | -------------- | -------------------- | --------------- |
 | POST    | /login          | Logowanie (email, password_hash)     |
-| GET   | /users | Lista użytkowników |
-| GET   | /users/:id | Pobierz dane użytkownika po ID |
 | GET   | /influencers | Lista influencerów |
-| GET   | /influencers/count  | Całkowita liczba influencerów |
-| GET   | /campaigns  | Lista kampanii |
-| GET   | /campaigns/count | Całkowita liczba kampanii |
 | GET   | /campaigns/top_campaigns | Top 3 kampanie wg wyświetleń |
 | GET   | /campaigns/upcoming_campaigns | Nadchodzące kampanie |
-| GET   | /campaign_influencers | Lista przypisań influencerów do kampanii|
-| GET   | /campaign_effects | Lista efektów kampanii |
-| GET   | /campaign_effects/likes/total | Łączna liczba polubień |
-| GET   | /payments  | Lista wypłat |
+| GET   | /campaigns/completed_campaigns | Zrealizowane kampanie |
+
 
 ## W repozytorium znajdują się:
 
