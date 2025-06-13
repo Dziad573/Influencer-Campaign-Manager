@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import useStore from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock } from 'lucide-react';
 import './LoginPage.scss';
+import { login } from '../services/loginService';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -13,13 +14,26 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
+        // try {
+        //     const res = await axios.post('http://localhost:3001/login', { email, password });
+        //     setUser(res.data);
+        //     localStorage.setItem('user', JSON.stringify(res.data));
+        //     navigate('/');
+        // } catch (err) {
+        //     setError('Nieprawidłowy email lub hasło.');
+        // }
         try {
-            const res = await axios.post('http://localhost:3001/login', { email, password });
-            setUser(res.data);
-            localStorage.setItem('user', JSON.stringify(res.data));
+            const userData = await login(email, password);
+            setUser(userData);
+            localStorage.setItem('user', JSON.stringify(userData));
+            setError('');
             navigate('/');
+
+            
         } catch (err) {
-            setError('Nieprawidłowy email lub hasło.');
+            console.log(email, password);
+            alert(err.message);
+            navigate('/');
         }
     };
 
