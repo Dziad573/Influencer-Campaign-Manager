@@ -1,0 +1,19 @@
+SELECT campaign_effects.effect_id, campaigns.name, campaigns.campaign_id,campaign_influencers.influencer_id, campaign_influencers.contract_signed, campaign_effects.views
+FROM campaign_effects 
+JOIN campaigns USING (campaign_id)
+JOIN  campaign_influencers USING(campaign_id);
+
+
+SELECT 
+  ce.effect_id, 
+  c.name AS campaign_name, 
+  c.campaign_id,
+  i.influencer_id, 
+  CONCAT(i.first_name, ' ', i.last_name) AS influencer_name,
+  ci.contract_signed, 
+  ce.views
+FROM campaign_effects ce
+JOIN campaigns c ON ce.campaign_id = c.campaign_id
+JOIN campaign_influencers ci 
+  ON ce.campaign_id = ci.campaign_id AND ce.influencer_id = ci.influencer_id
+JOIN influencers i ON ce.influencer_id = i.influencer_id;
