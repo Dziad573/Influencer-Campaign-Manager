@@ -143,7 +143,7 @@
   margin-top: 0.5rem;
 }
 
-.homepage .section--testimonials .testimonial {
+.homepage .section--opinions .opinion {
   background-color: var(--bg-card);
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -151,11 +151,11 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
-.homepage .section--testimonials .testimonial p {
+.homepage .section--opinions .opinion p {
   font-style: italic;
 }
 
-.homepage .section--testimonials .testimonial .author {
+.homepage .section--opinions .opinion .author {
   display: block;
   margin-top: 0.5rem;
   font-weight: bold;

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
+const InfluencerPlatform = require('./InfluencerPlatform');
 
 const User = require('./User')(sequelize, Sequelize);
 const Influencer = require('./Influencer')(sequelize, Sequelize);
@@ -7,6 +8,8 @@ const Campaign = require('./Campaign')(sequelize, Sequelize);
 const CampaignInfluencer = require('./CampaignInfluencer')(sequelize, Sequelize);
 const CampaignEffect = require('./CampaignEffect')(sequelize, Sequelize);
 const Payment = require('./Payment')(sequelize, Sequelize);
+const Platform = require('./Platform')(sequelize, Sequelize);
+const InfluencerPlatform = require('./InfluencerPlatform')(sequelize, Sequelize);
 
 User.hasOne(Influencer, { foreignKey: 'user_id' });
 Influencer.belongsTo(User, { foreignKey: 'user_id' });
@@ -18,8 +21,15 @@ CampaignInfluencer.belongsTo(Influencer, { foreignKey: 'influencer_id' });
 
 Campaign.hasMany(CampaignEffect, { foreignKey: 'campaign_id' });
 CampaignEffect.belongsTo(Campaign, { foreignKey: 'campaign_id' });
+
 // Influencer.hasMany(CampaignEffect, { foreignKey: 'influencer_id' });
 // CampaignEffect.belongsTo(Influencer, { foreignKey: 'influencer_id' });
+
+Platform.hasMany(InfluencerPlatform, { foreignKey: 'platform_id' });
+InfluencerPlatform.belongsTo(Platform, { foreignKey: 'platform_id' });
+
+Influencer.hasMany(InfluencerPlatform, { foreignKey: 'influencer_id' });
+InfluencerPlatform.belongsTo(Influencer, { foreignKey: 'influencer_id' });
 
 Campaign.hasMany(Payment, { foreignKey: 'campaign_id' });
 Payment.belongsTo(Campaign, { foreignKey: 'campaign_id' });
@@ -33,5 +43,7 @@ module.exports = {
     Campaign,
     CampaignInfluencer,
     CampaignEffect,
-    Payment
+    Payment,
+    Platform,
+    InfluencerPlatform
 };
